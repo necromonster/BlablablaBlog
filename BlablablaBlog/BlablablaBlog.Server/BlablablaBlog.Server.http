@@ -1,0 +1,9 @@
+﻿@BlablablaBlog.Server_HostAddress = http://localhost:5270
+
+GET {{BlablablaBlog.Server_HostAddress}}/feed/
+Accept: application/json
+
+POST {{BlablablaBlog.Server_HostAddress}}/post/
+Accept: application/json
+
+###

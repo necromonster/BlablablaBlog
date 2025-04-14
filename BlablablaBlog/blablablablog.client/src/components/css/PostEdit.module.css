@@ -1,0 +1,14 @@
+﻿.header {
+    text-align: left;
+    margin-bottom:10px;
+}
+.actionPanel {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 20px;    
+}
+    .actionPanel button {
+        margin:10px;
+    }
+

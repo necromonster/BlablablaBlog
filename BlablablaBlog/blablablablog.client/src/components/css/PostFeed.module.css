@@ -1,0 +1,34 @@
+﻿.postFeed{
+    margin:20px;
+}
+.postItem {
+    padding: 2px;
+    margin: 2px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid gray;
+    border-collapse: collapse;
+    min-width:auto;
+}
+.postTitle {
+    text-align: left;
+}
+.postMessage {
+    text-align: justify;
+}
+.postAction {
+    text-align: right;
+}
+.newPost{
+    text-align:left;
+    margin-top:20px;
+    margin-bottom:20px;
+}
+
+.footerBlock {
+    display: flex;
+    justify-content: space-between;
+}
+.commentBlock {
+    margin-top:20px;
+}

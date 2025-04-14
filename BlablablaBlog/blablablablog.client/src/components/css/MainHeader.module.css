@@ -1,0 +1,14 @@
+﻿.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin: 20px;
+}
+.header h1:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+.authBlock{
+    display:flex;
+
+}
