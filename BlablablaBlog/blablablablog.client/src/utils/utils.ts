@@ -1,33 +1,18 @@
-﻿export interface PostItem {    
-    id: number,
-    title: string;
-    message: string;
-    dateCreate: Date;
-    user: UserData;
-    hasComments: boolean;
-    comments?: CommentItem[];
-    tagList?: TagItem[];
-};
-export interface TagItem {
-    id: number;
-    text: string;
-}
-export interface CommentItem {
-    id: number;
-    message: string;
-    dateCreate: Date;
-    user: UserData;
-    replies?: CommentItem[];
-}
-export interface UserData {
-    id: number,
-    name: string;
-    unreadPosts?: number;
+﻿export function FormatDate(date: Date) {
+    const d = new Date(date);
+    const dateString = ("0" + d.getDate()).slice(-2) + "." + ("0" + (d.getMonth() + 1)).slice(-2) + "." +
+        d.getFullYear() + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2) + ":" + ("0" + d.getSeconds()).slice(-2);
+
+    return dateString;
 }
 
+/* ------------------------------------- */
+/* старые процедуры. оставлено справочно */
+/* ------------------------------------- */
+/*
 function getRandomDate() {
-    var from = new Date('2025-01-01T00:00:00.001Z');
-    var to = new Date(); 
+    const from = new Date('2025-01-01T00:00:00.001Z');
+    const to = new Date();
 
     const fromTime = from.getTime();
     const toTime = to.getTime();
@@ -50,14 +35,14 @@ export function getRandomComment(count: number, level: number) {
 
     const rnd = (len: number, chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789') => [...Array(len)].map(() => chars.charAt(Math.floor(Math.random() * chars.length))).join('');
     //let randInt;
-    let comments: Array<CommentItem> = [];
-    
+    const comments: Array<CommentItem> = [];
+
     let i = 0;
-    while (i < count - 1) {        
+    while (i < count - 1) {
         //randInt = Math.floor(Math.random());
         comments.push(
             {
-                id: (i + level*10), //level > 0 ? level * 1000 * randInt : randInt,
+                id: (i + level * 10), //level > 0 ? level * 1000 * randInt : randInt,
                 message: rnd(randomIntFromInterval(5, 50)),
                 dateCreate: getRandomDate(),
                 user: getRandomUser(),
@@ -65,33 +50,33 @@ export function getRandomComment(count: number, level: number) {
             }
         );
         i++;
-    }       
-    return comments;    
+    }
+    return comments;
 }
 export function getRandomTags() {
-    let tags: Array<TagItem> = [];
-    
-    const tagNames = ["первый", "пост", "лучший", "весна", "что-то", "новости"];    
+    const tags: Array<TagItem> = [];
+
+    const tagNames = ["первый", "пост", "лучший", "весна", "что-то", "новости"];
     const count = randomIntFromInterval(1, 5);
 
     let i = 0;
     let randInt;
     while (i < count) {
         randInt = Math.floor(Math.random() * tagNames.length);
-        tags.push( { id: randInt, text: tagNames[randInt] });
+        tags.push({ id: randInt, text: tagNames[randInt] });
         i++;
     }
 
     return tags;
 }
+
 export const TestPosts: PostItem[] = [
     {
         id: 1,
         title: "Первый пост",
         message: "Привет это пост1",
         dateCreate: getRandomDate(),
-        user: { id: 1, name: 'Василий' },
-        hasComments: true,
+        author: { id: 1, name: 'Василий' },
         comments: [
             {
                 id: 1,
@@ -131,8 +116,7 @@ export const TestPosts: PostItem[] = [
         title: "Второй пост",
         message: "Привет это пост2",
         dateCreate: getRandomDate(),
-        user: { id: 2, name: 'Александр' },
-        hasComments: true,
+        author: { id: 2, name: 'Александр' },
         comments: [
             {
                 id: 3,
@@ -154,8 +138,7 @@ export const TestPosts: PostItem[] = [
         title: "Третий пост",
         message: "Привет это пост3",
         dateCreate: getRandomDate(),
-        user: { id: 3, name: 'Григорий' },
-        hasComments: true,
+        author: { id: 3, name: 'Григорий' },
         comments: [
             {
                 id: 5,
