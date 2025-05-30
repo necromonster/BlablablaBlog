@@ -46,13 +46,3 @@ export interface FilterParams {
 }
 
 export const AppToastContext = createContext(null);
-
-/*
-export const CurrentUserContext = createContext<UserData | null>(null); //активный пользователь
-export const AppStateContext = createContext(null);                     // текущее состояние приложения
-export const PostIdEditContext = createContext(null);                   // id поста для редактирования (ну что за костыли)
-export const SetPostIdContext = createContext(null);                    // функция установки post id для редактрования (ну что за костыли)
-
-export const FilterContext = createContext<FilterParams | null>(null); // фильтр
-export const SetFilterContext = createContext(null);                   // установить фильтр
-*/

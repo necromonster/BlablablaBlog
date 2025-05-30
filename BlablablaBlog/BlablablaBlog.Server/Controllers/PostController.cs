@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
+using System;
 using System.Reflection.Metadata;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -89,6 +90,7 @@ namespace BlablablaBlog.Server.Controllers
             try
             {
                 await db.SaveChangesAsync();
+                return Ok(post);
             }
             catch (DbUpdateConcurrencyException)
             {

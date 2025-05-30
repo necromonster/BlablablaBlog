@@ -11,7 +11,7 @@ const initialState = {
 export function appReducer(state = initialState, action) {
     switch (action.type) {
         case APP_SET_FEED:
-            return { ...state, postId: "", appState: action.payload };
+            return { ...state, postId: action.payload.postId, appState: action.payload.appState };
         case APP_SET_POSTEDIT:
             return { ...state, postId: action.payload.postId, appState: action.payload.appState };
         default:

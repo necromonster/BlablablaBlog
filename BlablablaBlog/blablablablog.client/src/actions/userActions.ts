@@ -37,6 +37,7 @@ export function login(callback) {
 
 export function logout(callback) {
     return function (dispatch) {
+
         dispatch({
             type: LOGOUT,
         })

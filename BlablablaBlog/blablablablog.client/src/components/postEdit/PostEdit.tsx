@@ -15,7 +15,7 @@ import rehypeSanitize from "rehype-sanitize";
 interface IPostProps {
     editedPostId: string;
     currrentUser: UserData;
-    showFeed: () => void;
+    showFeed: (postId?: string) => void;
 }
 function PostEdit({ editedPostId, currrentUser, showFeed }: IPostProps) {
 
@@ -113,6 +113,7 @@ function PostEdit({ editedPostId, currrentUser, showFeed }: IPostProps) {
         });   
         
         if (response.ok) {
+            const Post = await response.json();
 
             let msg = "";
             if (postState === PostState.PUBLISHED)
@@ -122,8 +123,9 @@ function PostEdit({ editedPostId, currrentUser, showFeed }: IPostProps) {
                 else msg = "Черновик создан";
             }
                
-            appToast.current?.show({ severity: 'success', summary: 'Сообщение', detail: msg, life: 3000 });            
-            showFeed();
+            appToast.current?.show({ severity: 'success', summary: 'Сообщение', detail: msg, life: 3000 }); 
+            
+            showFeed(Post.id);
         }
         else {
             console.log("Ошибка HTTP: ", response.status );
@@ -163,36 +165,37 @@ function PostEdit({ editedPostId, currrentUser, showFeed }: IPostProps) {
                 showFeed();
         };
         const handlePublish = () => {
-            confirmDialog({
-                message: 'Опубликовать пост?',
-                header: 'Подтверждение',
-                icon: 'pi pi-exclamation-triangle',
-                defaultFocus: 'accept',
-                closable: false,
-                acceptLabel: 'Да',
-                rejectLabel: 'Нет',
-                accept: () => {
-                    if (validateForm()) {                        
-                        submitPost(PostState.PUBLISHED); 
-                    }                        
-                }
-            });
+            if (validateForm()) {
+                confirmDialog({
+                    message: 'Опубликовать пост?',
+                    header: 'Подтверждение',
+                    icon: 'pi pi-exclamation-triangle',
+                    defaultFocus: 'accept',
+                    closable: false,
+                    acceptLabel: 'Да',
+                    rejectLabel: 'Нет',
+                    accept: () =>{
+                        submitPost(PostState.PUBLISHED);
+                    }
+                });
+            }            
         };
         const handleSaveDraft = () => {
-            confirmDialog({
-                message: 'Сохранить черновик?',
-                header: 'Подтверждение',
-                icon: 'pi pi-exclamation-triangle',
-                defaultFocus: 'accept',
-                closable: false,
-                acceptLabel: 'Да',
-                rejectLabel: 'Нет',
-                accept: () => {
-                    if (validateForm()) {                        
+            if (validateForm()) {
+                confirmDialog({
+                    message: 'Сохранить черновик?',
+                    header: 'Подтверждение',
+                    icon: 'pi pi-exclamation-triangle',
+                    defaultFocus: 'accept',
+                    closable: false,
+                    acceptLabel: 'Да',
+                    rejectLabel: 'Нет',
+                    accept: () => {
                         submitPost(PostState.DRAFT);
-                    }                               
-                }
-            });
+                    }
+                });
+            }
+            
         };
 
         return (

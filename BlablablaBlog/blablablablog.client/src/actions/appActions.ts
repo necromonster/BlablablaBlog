@@ -3,11 +3,14 @@
 export const APP_SET_FEED = 'APP_SET_FEED'
 export const APP_SET_POSTEDIT = 'APP_SET_POSTEDIT'
 
-export function handleShowFeed() {
+export function handleShowFeed(postId?: string) {
     return function (dispatch) {
         dispatch({
             type: APP_SET_FEED,
-            payload: AppState.APP_SHOW_FEED,
+            payload: {
+                postId: postId,
+                appState: AppState.APP_SHOW_FEED,                
+            },
         })
     }
 }

@@ -17,6 +17,7 @@
     "primereact": "^10.9.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-oidc-context": "^3.3.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.5.3",
     "rehype-sanitize": "^6.0.0"

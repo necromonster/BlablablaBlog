@@ -16,25 +16,11 @@ import { connect } from 'react-redux';
 import { handleShowFeed, handleShowPostEdit } from '../../actions/appActions.ts';
 import { AppState } from '../../types/types.ts';
 import { login, logout } from '../../actions/userActions.ts';
-import { getFeed } from '../../actions/feedActions.ts';
 
 function MainHeader({ app, feed, user, showFeed, showPostEdit, handleLogin, handleLogout }) {
 
-    //const appState = useSelector((state) => state.app.appState);
-    //const currentUser = useSelector((state) => state.user.profile);
-    //const currentUser = useContext(CurrentUserContext);
-    //const appState = useContext(AppStateContext);
-
     const menuUser = useRef<Menu>(null);   
     const [visibleLoginPage, setVisibleLoginPage] = useState<boolean>(false);
-
-    /*
-    const handleLogOut = () => {
-        //changeAuthorizedState(false);
-        //changeAppState(AppState.FEED);
-        handleLogout();
-
-    };*/
 
     const showToIndexMessage = () => {
         if (app.appState === AppState.APP_SHOW_EDIT) //TODO: как бы сделать такую же проверку, как при нажатии на Отмена в PostEdit
@@ -58,7 +44,7 @@ function MainHeader({ app, feed, user, showFeed, showPostEdit, handleLogin, hand
             icon: 'pi pi-sign-out',
             command: () => {
                 const successCallback = () => {
-                    getFeed(feed.filter);
+                    showFeed();
                 }
                 handleLogout(successCallback)
             }
@@ -76,14 +62,12 @@ function MainHeader({ app, feed, user, showFeed, showPostEdit, handleLogin, hand
             rejectLabel: 'Нет',
             accept: () => {
                 const successCallback = () => {                    
-                    getFeed(feed.filter);                                        
+                    showFeed();                                        
                 }
-                handleLogin(successCallback);
-                
-            }
-            
-
+                handleLogin(successCallback);                
+            }            
         });
+
         //setVisibleLoginPage(true);        
     };
     

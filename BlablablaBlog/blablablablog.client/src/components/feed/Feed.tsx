@@ -10,6 +10,7 @@ import { Button } from 'primereact/button';
 import { Chip } from 'primereact/chip';
 
 interface IFeedProps {
+    postId?: string,
     currentUser: UserData;
     filter: FilterParams;
     posts: PostItem[];
@@ -19,12 +20,11 @@ interface IFeedProps {
     handlerDeletePost: (postId: string) => Promise<void>;
     handlerGetFeed: () => void;
 };
-function Feed({ currentUser, filter, posts, isFetching, error, showPostEdit, handlerDeletePost, handlerGetFeed }: IFeedProps) {
-    
+function Feed({ postId,currentUser, filter, posts, isFetching, error, showPostEdit, handlerDeletePost, handlerGetFeed }: IFeedProps) {
+
     const handleNewPost = () => {
         showPostEdit("");
     }   
-
     function FilterPanel() {
       /*  const tagCloud =             
             <div>
@@ -50,32 +50,6 @@ function Feed({ currentUser, filter, posts, isFetching, error, showPostEdit, han
     }
 
     function FeedList() {
-      /*  const [feedData, setFeedData] = useState<PostItem[]>();
-        const [loading, setLoading] = useState(false);*/
-        
-        // получение постов с сервера
-     /*   useEffect(() => {
-            // запрос происходит дважды потому что девелопмент мод <StrictMode> в main.tsx
-            /*  setLoading(true);
-              fetch('post/feed')
-                  .then(response => {              
-                      if (!response.ok) {
-                          throw new Error('Error fetching feed: ' + response.statusText);
-                      }
-                      return response.json()
-                  })
-                  .then(
-                      data => {                                
-  
-                          setFeedData(data);                    
-                          setLoading(false);
-                      })              
-                  .catch((err) => {
-                      console.log(err)
-                  })
-        }, []);
-*/
-       
 
         let content;
         if (isFetching) {
@@ -85,7 +59,7 @@ function Feed({ currentUser, filter, posts, isFetching, error, showPostEdit, han
             
             if (posts && posts?.length>0)
                 content = posts.map(postItem => {
-                    return <Post
+                    return <Post                        
                         key={postItem.id}
                         postData={postItem}
                         currentUser={currentUser}
